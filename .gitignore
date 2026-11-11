@@ -7,5 +7,5 @@ src/matrix_mult
 __pycache__/
 *.pyc
 
-# Resultados y datos pesados (opcional, por si no quieres subir CSVs masivos)
+# Resultados y datos pesados
 data/*.csv

@@ -3,19 +3,16 @@ import subprocess
 import numpy as np
 import pandas as pd
 
-# 1. Control estricto de multithreading implícito en librerías externas
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
-# Configuración del experimento
 SIZES = [250, 500, 750, 1000]
 THREADS_LIST = [1, 2, 4, 6, 8, 12, 16]
 REPETITIONS = 5
 
-# Rutas según SO
 EXECUTABLE = os.path.join("..", "src", "matrix_mult.exe" if os.name == "nt" else "matrix_mult")
 OUTPUT_CSV = os.path.join("..", "results", "benchmark_results.csv")
 
@@ -48,7 +45,6 @@ def run_experiment():
                 except Exception as e:
                     print(f"Error en N={n}, p={p}, rep={rep}: {e}")
 
-            # Estadísticos de resumen (Mediana e IQR)
             seq_median = np.median(seq_times)
             seq_q75, seq_q25 = np.percentile(seq_times, [75 ,25])
             seq_iqr = seq_q75 - seq_q25
@@ -57,7 +53,6 @@ def run_experiment():
             par_q75, par_q25 = np.percentile(par_times, [75 ,25])
             par_iqr = par_q75 - par_q25
 
-            # Métricas principales
             speedup = seq_median / par_median if par_median > 0 else 0
             efficiency = speedup / p
 

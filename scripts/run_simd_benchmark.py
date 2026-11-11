@@ -3,7 +3,6 @@ import subprocess
 import numpy as np
 import pandas as pd
 
-# Control de multithreading implícito
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
 
@@ -20,14 +19,12 @@ print("Running SIMD vs Non-SIMD Comparative Benchmark...")
 
 for n in SIZES:
     for p in THREADS_TO_TEST:
-        # 1. Non-SIMD Binary
         t_no_simd_list = []
         for _ in range(REPETITIONS):
             out = subprocess.check_output([EXE_NO_SIMD, str(n), str(p)], text=True).strip()
             t_no_simd_list.append(float(out.split(",")[3]))
         med_no_simd = np.median(t_no_simd_list)
 
-        # 2. SIMD Binary
         t_simd_list = []
         for _ in range(REPETITIONS):
             out = subprocess.check_output([EXE_SIMD, str(n), str(p)], text=True).strip()

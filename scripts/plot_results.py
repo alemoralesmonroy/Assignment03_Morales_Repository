@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load benchmark results
 CSV_PATH = os.path.join("..", "results", "benchmark_results.csv")
 RESULTS_DIR = os.path.join("..", "results")
 
@@ -11,7 +10,6 @@ df = pd.read_csv(CSV_PATH)
 plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
 sizes = df["N"].unique()
 
-# 1. Speedup S(p) Plot
 plt.figure(figsize=(10, 6))
 for n in sizes:
     sub_df = df[df["N"] == n]
@@ -31,7 +29,6 @@ plt.tight_layout()
 plt.savefig(os.path.join(RESULTS_DIR, "speedup_plot.png"), dpi=300)
 plt.close()
 
-# 2. Efficiency E(p) Plot
 plt.figure(figsize=(10, 6))
 for n in sizes:
     sub_df = df[df["N"] == n]
@@ -50,7 +47,6 @@ plt.tight_layout()
 plt.savefig(os.path.join(RESULTS_DIR, "efficiency_plot.png"), dpi=300)
 plt.close()
 
-# 3. Execution Time & Variability (IQR) for N = 1000
 plt.figure(figsize=(10, 6))
 sub_1000 = df[df["N"] == 1000]
 
