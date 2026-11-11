@@ -1,0 +1,11 @@
+# Binarios de C
+src/*.exe
+src/*.out
+src/matrix_mult
+
+# Python
+__pycache__/
+*.pyc
+
+# Resultados y datos pesados (opcional, por si no quieres subir CSVs masivos)
+data/*.csv
